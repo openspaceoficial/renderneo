@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="consultaCheque.css">
+    <title>Consulta de Boletos</title>
+</head>
+<body>
+    <header>
+        <nav class="header-container">
+            <h1>SISTEMA NEO</h1>
+            <img src="logoneo.png" alt="Logo da Empresa" class="logo">
+            <ul>
+                <li><a href="pag.html">Inicio</a></li>
+                <li><a href="cadastro.html">Cadastro Cheques</a></li>
+                <li><a href="relatorio.html">Relatório de Cheques</a></li>
+                <li><a href="consulta.html">Consulta Cheque</a></li>
+                <li><a href="boleto.html">Boleto</a></li>
+                <li><a href="consultaBoleto.html">Consulta Boleto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Consultar Boletos</h2>
+
+        <!-- Filtro de status -->
+        <label for="status-filtro">Filtrar por Status:</label>
+        <select id="status-filtro">
+            <option value="todos">Todos</option>
+            <option value="pago">Pago</option>
+            <option value="pendente">Pendente</option>
+            <option value="atrasado">Vencido</option>
+        </select>
+        <button id="filtrar-btn">Filtrar</button>
+
+        <!-- Resultados -->
+        <div id="resultados"></div>
+    </div>
+
+   <!-- Fundo do Modal -->
+<div id="modal-overlay"></div>
+
+<!-- Formulário de Edição de Cheques (Modal) -->
+<div id="form-edicao">
+    <h3>Editar Boleto</h3>
+    <form onsubmit="event.preventDefault(); salvarEdicao();">
+        <label for="nome_pagador">Nome do Pagador:</label>
+                    <input type="text" id="nome_pagador" name="nome_pagador" required>
+                
+                    <label for="cpf_pagador">CPF do Pagador:</label>
+                    <input type="text" id="cpf_pagador" name="cpf_pagador" placeholder="000.000.000-00" required>
+                
+                    <label for="endereco_pagador">Endereço do Pagador:</label>
+                    <input type="text" id="endereco_pagador" name="endereco_pagador" required>
+                
+                    <label for="valor">Valor:</label>
+                    <input type="number" id="valor" step="0.01" name="valor" required>
+                
+                    <label for="data_emissao">Data de Emissão</label>
+                    <input type="date" id="data_emissao" name="data_emissao" required>
+
+                    <label for="data_vencimento">Data de Vencimento:</label>
+                    <input type="date" id="data_vencimento" name="data_vencimento" required>
+                
+                    <label for="descricao">Descrição:</label>
+                    <textarea name="descricao" id="descricao" rows="3"></textarea>
+                
+        <button type="submit" onclick="salvarEdicao()">Salvar</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+</div>
+
+
+    <footer>
+        <p>Todos os direitos reservados © 2024</p>
+    </footer>
+
+    <script src="scriptConsultaBoletos.js"></script>
+</body>
+
+</html>

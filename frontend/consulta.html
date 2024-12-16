@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="consultaCheque.css">
+    <title>Consulta de Cheques</title>
+</head>
+<body>
+    <header>
+        <nav class="header-container">
+            <h1>SISTEMA NEO</h1>
+            <img src="logoneo.png" alt="Logo da Empresa" class="logo">
+            <ul>
+                <li><a href="pag.html">Inicio</a></li>
+                <li><a href="cadastro.html">Cadastro Cheques</a></li>
+                <li><a href="relatorio.html">Relatório de Cheques</a></li>
+                <li><a href="consulta.html">Consulta Cheque</a></li>
+                <li><a href="boleto.html">Boleto</a></li>
+                <li><a href="consultaBoleto.html">Consulta Boleto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Consultar Cheques</h2>
+
+        <label for="status-filtro">Escolha o filtro: (Data de Vencimento, Nome do Beneficiário ou Status)</label>
+<select onchange="carregarFiltros()" id="status-filtroo">
+    <option value="">Selecione</option>  <!-- Opção "Selecione" adicionada -->
+    <option value="Data">Data</option>
+    <option value="Status">Status</option>
+    <option value="Nome">Nome</option>
+</select>
+
+
+        <!-- Filtro de status -->
+    <div id="filtro-nome" style="display: none;">
+        <label for="nomeBeneficiario">Nome do Beneficiário:</label>
+        <input type="text" class="status-filtro" id="nomeBeneficiario" placeholder="Digite o nome do beneficiário">
+        <button onclick="carregarChequesPorBeneficiario()">Pesquisar</button>
+    </div>
+
+    <div id="filtro-data" style="display: none;">
+        <div id="relatorio" class="container-data">
+            <form id="relatorioForm">
+                <label for="data_inicio">Data de Início:</label>
+                <input type="date" id="data_inicio" name="data_inicio" required>
+                <label for="data_fim">Data de Fim:</label>
+                <input type="date" id="data_fim" name="data_fim" required>
+                <button type="submit">Pesquisar</button>
+            </form>
+     </div>
+    </div>
+
+    <div id="filtro-status" style="display: none;">
+        <label for="status-filtro">Filtrar por Status:</label>
+        <select id="status-filtro">
+            <option value="todos">Todos</option>
+            <option value="Compensado">Compensado</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Vencido">Vencido</option>
+        </select>
+        <button id="filtrar-btn">Pesquisar</button>
+    </div>    
+
+        <!-- Resultados -->
+        <div id="resultados"></div>
+    </div>
+    <div id="loadingSpinner" style="display: none;">
+        <p>Carregando...</p>
+    </div>
+    <div id="errorMessage" style="color: red; display: none;">Erro ao carregar os dados. Tente novamente.</div>
+
+
+   <!-- Fundo do Modal -->
+<div id="modal-overlay"></div>
+
+<!-- Formulário de Edição de Cheques (Modal) -->
+<div id="form-edicao">
+    <h3>Editar Cheque</h3>
+    <form onsubmit="event.preventDefault(); salvarEdicao();">
+        <input type="hidden" id="cheque-id">
+        <label>Cheque Nº:</label><input type="text" id="cheque_numero"><br>
+        <label>Beneficiário:</label><input type="text" id="nome_beneficiario"><br>
+        <label>Valor:</label><input type="text" id="valor"><br>
+        
+        <label for="status">Filtrar por Status:</label>
+        <select id="status">
+            <option value="todos">Todos</option>
+            <option value="Compensado">Compensado</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Vencido">Vencido</option>
+        </select><br>
+        
+        <label>Data de Emissão:</label><input type="date" id="data_emissao"><br>
+        <label>Data de Vencimento:</label><input type="date" id="data_vencimento"><br>
+        <label>Descrição:</label><input type="text" id="descricao"><br>
+        <label>Empresa Emitente:</label><input type="text" id="empresa"><br>
+        <button type="submit" onclick="salvarEdicao()">Salvar</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+</div>
+
+
+    <footer>
+        <p>Todos os direitos reservados © 2024</p>
+    </footer>
+
+    <script src="script-consulta.js"></script>
+</body>
+
+</html>
